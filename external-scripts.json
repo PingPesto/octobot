@@ -11,9 +11,4 @@
   "hubot-ambush",
   "hubot-plusplus",
   "hubot-factoids",
-  "hubot-auth",
-  "hubot-github-repo-event-notifier",
-  "hubot-google-hangouts",
-  "hubot-launchpad",
-  "hubot-leankit"
 ]
