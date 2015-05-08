@@ -10,5 +10,7 @@
   "hubot-youtube",
   "hubot-ambush",
   "hubot-plusplus",
-  "hubot-factoids"
+  "hubot-factoids",
+  "hubot-bofh",
+  "hubot-subreddit-linker",  
 ]
