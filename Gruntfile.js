@@ -6,6 +6,11 @@ module.exports = function(grunt) {
             all: ['*.js', 'scripts/*.js']
         },
         coffeelint: {
+            options: {
+                'max_line_length': {
+                    'level': 'ignore'
+                },
+            },
             all: ['scripts/*.coffee']
         },
     });
