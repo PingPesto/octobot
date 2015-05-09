@@ -6,7 +6,7 @@
 #
 # Configuration:
 #   None
-# 
+#
 # Commands:
 #   http://cl.ly/* - Detects the drop's type and displays it or prints its content if it's an image or text file respectively
 #

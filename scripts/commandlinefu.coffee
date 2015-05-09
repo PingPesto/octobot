@@ -17,9 +17,9 @@
 module.exports = (robot) ->
   robot.respond /commandlinefu(?: me)? *(.*)?/i, (msg) ->
     query = if msg.match[1]
-          "matching/#{msg.match[1]}/#{new Buffer(msg.match[1]).toString('base64')}/json"
-        else 
-          "random/json"
+      "matching/#{msg.match[1]}/#{new Buffer(msg.match[1]).toString('base64')}/json"
+    else
+      "random/json"
     command msg, "http://www.commandlinefu.com/commands/#{query}", (cmd) ->
       msg.send cmd
 
