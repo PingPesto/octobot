@@ -11,7 +11,7 @@
   "hubot-ambush",
   "hubot-plusplus",
   "hubot-factoids",
-  "hubot-heroku-keepalive"
+  "hubot-heroku-keepalive",
   "hubot-bofh",
   "hubot-subreddit-linker"
 ]
