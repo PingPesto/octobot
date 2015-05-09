@@ -1,5 +1,5 @@
 # Bounce Break script
-# 
+#
 # bounce me - Send a random bouncebreak.com image
 
 htmlparser = require "htmlparser"

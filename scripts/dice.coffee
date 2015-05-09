@@ -42,7 +42,8 @@ report = (results) ->
         total = results.reduce (x, y) -> x + y
         finalComma = if (results.length > 2) then "," else ""
         last = results.pop()
-        "I rolled #{results.join(", ")}#{finalComma} and #{last}, making #{total}."
+        "I rolled #{results.join(", ")}#{finalComma} and #{last}," +
+        "making #{total}."
 
 roll = (dice, sides) ->
   rollOne(sides) for i in [0...dice]

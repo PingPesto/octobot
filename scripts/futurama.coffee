@@ -17,7 +17,7 @@
 #   <something> does not work that way! - Generates a Morbo meme
 #   <things> do not work that way! - Generates a Morbo meme
 #   hypnotoad - ALL GLORY TO THE HYPNOTOAD
-#   don't want to live - Shows the Professor's "don't want to live on this planet anymore" meme
+#   don't want to live - Professors "don't want to live" meme
 #   shut up and take my money - Shows the Fry meme
 #
 # Notes:
@@ -28,13 +28,16 @@
 
 module.exports = (robot) ->
   robot.hear /not sure if (.*) or (.*)/i, (msg) ->
-    generateMeme msg, 305, 84688, "not sure if #{ msg.match[1] }", "or #{ msg.match[2] }"
+    generateMeme msg, 305, 84688, "not sure if #{ msg.match[1] }",
+    "or #{ msg.match[2] }"
 
   robot.hear /(.*) is bad and you should feel bad/i, (msg) ->
-    generateMeme msg, 12270, 1136171, "#{ msg.match[1] } is bad", "and you should FEEL bad!"
+    generateMeme msg, 12270, 1136171, "#{ msg.match[1] } is bad",
+    "and you should FEEL bad!"
 
   robot.hear /(.*) are bad and you should feel bad/i, (msg) ->
-    generateMeme msg, 12270, 1136171, "#{ msg.match[1] } are bad", "and you should FEEL bad!"
+    generateMeme msg, 12270, 1136171, "#{ msg.match[1] } are bad",
+    "and you should FEEL bad!"
 
   robot.hear /(.*) why not zoidberg?/i, (msg) ->
     generateMeme msg, 135099, 1643190, msg.match[1], "why not zoidberg?"
@@ -46,16 +49,19 @@ module.exports = (robot) ->
     generateMeme msg, 2784, 1113725, msg.match[1], "do not work that way"
 
   robot.hear /.*(hypnotoad).*/i, (msg) ->
-    msg.send "http://i0.kym-cdn.com/photos/images/newsfeed/000/008/746/hypnotoadfullsize.gif"
+    msg.send "http://i0.kym-cdn.com/photos/images/newsfeed/000/008/" +
+    "746/hypnotoadfullsize.gif"
 
   robot.hear /.*(don'?t want to live).*/i, (msg) ->
-    msg.send "http://i0.kym-cdn.com/photos/images/newsfeed/000/126/314/3cd8a33a.png"
+    msg.send "http://i0.kym-cdn.com/photos/images/newsfeed/000/" +
+    "126/314/3cd8a33a.png"
 
   robot.hear /shut up and take my money/i, (msg) ->
     msg.send "http://i.imgur.com/QlmfC.jpg"
 
   robot.hear /futurama fry/i, (msg) ->
-    url = "http://version1.api.memegenerator.net/Instances_Select_ByPopular?languageCode=en&pageSize=24&urlName=Futurama-Fry"
+    url = "http://version1.api.memegenerator.net/Instances_Select_ByPopular?" +
+    "languageCode=en&pageSize=24&urlName=Futurama-Fry"
     msg.http(url).get() (err, res, body) ->
       resp = JSON.parse(body)
       rand = msg.random resp.result
@@ -66,9 +72,14 @@ generateMeme = (msg, generatorID, imageID, msg1, msg2) ->
     msg.send "Error: You must specify your MemeGenerator.net username"
   if not process.env.HUBOT_MEMEGENERATOR_PASSWORD
     msg.send "Error: You must specify your MemeGenerator.net pasword"
-  if not (process.env.HUBOT_MEMEGENERATOR_USERNAME and process.env.HUBOT_MEMEGENERATOR_PASSWORD)
+  if not (process.env.HUBOT_MEMEGENERATOR_USERNAME and
+  process.env.HUBOT_MEMEGENERATOR_PASSWORD)
     return
-  url = "http://version1.api.memegenerator.net/Instance_Create?username=#{ process.env.HUBOT_MEMEGENERATOR_USERNAME }&password=#{ process.env.HUBOT_MEMEGENERATOR_PASSWORD }&languageCode=en&generatorID=#{ generatorID }&imageID=#{ imageID }&text0=#{ encodeURIComponent(msg1) }&text1=#{ encodeURIComponent(msg2) }"
+  url = "http://version1.api.memegenerator.net/Instance_Create?username=" +
+  "#{ process.env.HUBOT_MEMEGENERATOR_USERNAME }&password=" +
+  "#{ process.env.HUBOT_MEMEGENERATOR_PASSWORD }&languageCode=en&generatorID=" +
+  "#{ generatorID }&imageID=#{ imageID }&text0=#{ encodeURIComponent(msg1) }&" +
+  "text1=#{ encodeURIComponent(msg2) }"
   msg.http(url).get() (err, res, body) ->
     resp = JSON.parse(body)
     msg.send resp.result.instanceImageUrl
