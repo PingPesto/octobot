@@ -13,7 +13,7 @@
 # Author:
 #   artfuldodger
 
-redditcache = {};
+redditcache = {}
 
 module.exports = (robot) ->
   robot.respond /reddit( .+)*/i, (msg) ->
@@ -54,12 +54,12 @@ reddit = (msg, subreddit) ->
         post = getPost(posts)
 
         # split img url to get extension
-        postParts = post.url.split(".");
+        postParts = post.url.split(".")
 
         # if extension is .gifv replace it with .gif
         if postParts[ postParts.length - 1 ] is "gifv"
-            postParts[ postParts.length - 1 ] = "gif"
-            post.url = postParts.join(".")
+          postParts[ postParts.length - 1 ] = "gif"
+          post.url = postParts.join(".")
 
         #if we've already seen all the top posts
         if post is -1
@@ -84,8 +84,8 @@ reddit = (msg, subreddit) ->
 # return a fresh post
 getPost = (posts) ->
   postFound = false
-  temp_post = {};
-  random = 0;
+  temp_post = {}
+  random = 0
 
   # loop until we find a post to return
   until postFound
@@ -131,8 +131,8 @@ checkPost = (id, subreddit) ->
 
 
 logPost = (id, subreddit) ->
-	if redditcache[subreddit]
-	  redditcache[subreddit].push id
-	else
-	  redditcache[subreddit] = []
-	  redditcache[subreddit].push id
+  if redditcache[subreddit]
+    redditcache[subreddit].push id
+  else
+    redditcache[subreddit] = []
+    redditcache[subreddit].push id

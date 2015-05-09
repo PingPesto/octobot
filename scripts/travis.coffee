@@ -9,7 +9,7 @@
 #
 # Commands:
 #   hubot travis me <user>/<repo> - Returns the build status of https://github.com/<user>/<repo>
-# 
+#
 # URLS:
 #   POST /hubot/travis?room=<room>[&type=<type]
 #     - for XMPP servers (such as HipChat) this is the XMPP room id which has the form id@server
