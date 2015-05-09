@@ -13,5 +13,6 @@
   "hubot-factoids",
   "hubot-heroku-keepalive",
   "hubot-bofh",
-  "hubot-subreddit-linker"
+  "hubot-subreddit-linker",
+  "hubot-google-hangouts"
 ]
