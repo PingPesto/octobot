@@ -8,10 +8,17 @@ module.exports = function(grunt) {
         coffeelint: {
             all: ['scripts/*.coffee']
         },
+        exec: {
+            hubot: 'bin/hubot -t',
+            npm_purge: 'rm -rf node_modules/*',
+            npm_clean: 'rm npm-debug*'
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-coffeelint');
+    grunt.loadNpmTasks('grunt-exec');
 
-    grunt.registerTask('default', ['jshint', 'coffeelint']);
+    /* Custom task to test hubot config */
+    grunt.registerTask('default', ['jshint', 'coffeelint', 'exec']);
 };
