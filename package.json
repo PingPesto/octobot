@@ -10,7 +10,7 @@
     "hubot": "^2.12.0",
     "hubot-ambush": "0.0.3",
     "hubot-bofh": "git://github.com/danriti/hubot-bofh.git#master",
-    "hubot-diagnostics": "0.0.1",
+    "hubot-diagnostics": "0.0.1"
     "hubot-factoids": "^0.2.6",
     "hubot-google-hangouts": "^0.7.1",
     "hubot-google-images": "^0.1.4",
