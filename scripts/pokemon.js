@@ -28,8 +28,8 @@ function run( pokemon, msg ){
 			if( err ){
 				return msg.send( 'Error: ' + err );
 			} else {
-				if( !body || body == '' ){
-					return msg.send('wtf no stoofs?')
+				if( !body || body === '' ){
+					return msg.send('wtf no stoofs?');
 				} else {
 					var response = JSON.parse( body );
 					full_pokedex = response.pokemon;
@@ -48,8 +48,8 @@ function getPokemonInfo( resource_uri, msg ){
 		if( err ){
 			return msg.send( 'Error: ' + err );
 		} else {
-			if( !body || body == '' ){
-				return msg.send('wtf no stoofs?')
+			if( !body || body === '' ){
+				return msg.send('wtf no stoofs?');
 			} else {
 				var response = JSON.parse( body );
 				var poke_id = response.national_id;
@@ -62,18 +62,18 @@ function getPokemonInfo( resource_uri, msg ){
 
 function searchPokedex( pokemon, msg ){
 	for( var i = 0; i < full_pokedex.length; i++ ){
-		if( full_pokedex[i].name == pokemon ){
+		if( full_pokedex[i].name === pokemon ){
 			return getPokemonInfo( full_pokedex[i].resource_uri, msg );
 		}
 	}
 	return msg.send( 'Pokemon not found!' );
-} 
+}
 
 
 module.exports = function(robot){
 	robot.hear(/ichooseyou( .+)*/i, function(msg){
 		run( msg.match[1].trim(), msg );
 	});
-}
+};
 
 

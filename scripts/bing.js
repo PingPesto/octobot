@@ -13,7 +13,7 @@ var safe_search = '%27Off%27';
 module.exports = function(robot) {
 	robot.respond(/(bing)( me)? (.*)/i, function(msg) {
 
-		if( key == '' ){ return msg.send('Set your Bing Key moron.') }
+		if( key === '' ){ return msg.send('Set your Bing Key moron.'); }
 
 		var query = encodeURIComponent( "'" + msg.match[3] + "'" );
 
@@ -28,16 +28,16 @@ module.exports = function(robot) {
 				if( res.statusCode != 200 ){
 					return msg.send( 'did not get 200 back: ' + res.statusCode );
 				} else {
-					if( !body || body == '' ){
-						return msg.send('wtf no stoofs?')
+					if( !body || body === '' ){
+						return msg.send('wtf no stoofs?');
 					} else {
 						body = JSON.parse(body);
 						var first = body.d;
-						if( !first || first == '' ){
+						if( !first || first === '' ){
 							return msg.send('cant find the d');
 						} else {
 							var results = first.results;
-							if( !results || results == '' ){
+							if( !results || results === '' ){
 								return msg.send('cant find results');
 							} else {
 								var randy = Math.floor(Math.random() * results.length);
@@ -55,4 +55,4 @@ module.exports = function(robot) {
 
 		});
 	});
-}
+};
