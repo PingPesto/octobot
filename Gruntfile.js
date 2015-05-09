@@ -16,13 +16,19 @@ module.exports = function(grunt) {
         exec: {
             hubot: 'bin/hubot -t',
             npm_purge: 'rm -rf node_modules/*',
+        },
+        jsonlint: {
+            dependencies: {
+                src: [ '*.json']
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-coffeelint');
     grunt.loadNpmTasks('grunt-exec');
 
 
-    grunt.registerTask('default', ['jshint', 'coffeelint', 'exec']);
+    grunt.registerTask('default', ['jsonlint', 'jshint', 'coffeelint', 'exec']);
 };
