@@ -13,10 +13,16 @@ module.exports = function(grunt) {
             },
             all: ['scripts/*.coffee']
         },
+        exec: {
+            hubot: 'bin/hubot -t',
+            npm_purge: 'rm -rf node_modules/*',
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-coffeelint');
+    grunt.loadNpmTasks('grunt-exec');
 
-    grunt.registerTask('default', ['jshint', 'coffeelint']);
+
+    grunt.registerTask('default', ['jshint', 'coffeelint', 'exec']);
 };
