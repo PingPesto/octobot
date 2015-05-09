@@ -28,19 +28,19 @@ reddit = (msg, subreddit) ->
     if subreddits.length > 1
       randy = Math.floor(Math.random() * subreddits.length)
       subreddit = subreddits[randy]
-  
+
   url = if subreddit? then "http://www.reddit.com/r/#{subreddit}/top.json" else "http://www.reddit.com/top.json"
   msg
     .http(url)
       .get() (err, res, body) ->
-        
+
         # Sometimes when a subreddit doesn't exist, it wants to redirect you to the search page.
         # Oh, and it doesn't send back 302s as JSON
         if body?.match(/^302/)?[0] == '302'
           msg.send "That subreddit does not seem to exist."
           return
 
-        posts = JSON.parse(body) 
+        posts = JSON.parse(body)
 
         # If the response has an error attribute, let's get out of here.
         if posts.error?
@@ -53,6 +53,14 @@ reddit = (msg, subreddit) ->
 
         post = getPost(posts)
 
+        # split img url to get extension
+        postParts = post.url.split(".");
+
+        # if extension is .gifv replace it with .gif
+        if postParts[ postParts.length - 1 ] is "gifv"
+            postParts[ postParts.length - 1 ] = "gif"
+            post.url = postParts.join(".")
+
         #if we've already seen all the top posts
         if post is -1
           msg.send "All top posts for this subreddit already displayed!"
@@ -63,7 +71,7 @@ reddit = (msg, subreddit) ->
         # while post?.domain != "i.imgur.com" && tries_to_find_picture < 30
         #   post = getPost(posts)
         #   tries_to_find_picture++
-        
+
         # Send pictures with the url on one line so Campfire displays it as an image
         if post.domain == 'i.imgur.com'
           msg.send "#{post.title} - http://www.reddit.com#{post.permalink}"
@@ -113,7 +121,7 @@ checkPost = (id, subreddit) ->
   if redditcache[ subreddit ]
     i = 0
     while i < redditcache[subreddit].length
-      return true if redditcache[subreddit][i] is id 
+      return true if redditcache[subreddit][i] is id
       i++
 
     false
