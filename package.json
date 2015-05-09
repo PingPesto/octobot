@@ -8,6 +8,7 @@
     "htmlparser": "^1.7.6",
     "hubot": "^2.12.0",
     "hubot-ambush": "0.0.3",
+    "hubot-bofh": "git://github.com/danriti/hubot-bofh.git#master",
     "hubot-diagnostics": "0.0.1",
     "hubot-factoids": "^0.2.6",
     "hubot-google-hangouts": "^0.7.1",
@@ -23,6 +24,7 @@
     "hubot-scripts": "^2.5.16",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.3.0",
+    "hubot-subreddit-linker": "^1.1.0",
     "hubot-youtube": "^0.1.2"
   },
   "engines": {
