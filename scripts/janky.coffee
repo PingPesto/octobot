@@ -39,7 +39,8 @@ buildsStatus = (builds) ->
 
 buildStatusMessage = (build) ->
   response = ""
-  response += "Build ##{build.number} (#{build.sha1}) of #{build.repo}/#{build.branch} #{build.status}"
+  response += "Build ##{build.number} (#{build.sha1}) of " +
+  "#{build.repo}/#{build.branch} #{build.status}"
   response += "(#{build.duration}s) #{build.compare}"
   response += " [Log: #{build.web_url} ]"
 
@@ -94,22 +95,27 @@ module.exports = (robot) ->
       else
         msg.reply "Unable to fetch help. Got HTTP status #{statusCode}"
 
-  robot.respond /ci build ([-_\.0-9a-zA-Z]+)(\/([-_\+\.a-zA-z0-9\/]+))?/i, (msg) ->
+  robot.respond /ci build ([-_\.0-9a-zA-Z]+)(\/([-_\+\.a-zA-z0-9\/]+))?/i,
+  (msg) ->
     app     = msg.match[1]
     branch  = msg.match[3] || "master"
     room_id = msg.message.user.room
     user    = msg.message.user.name.replace(/\ /g, "+")
 
-    post "#{app}/#{branch}?room_id=#{room_id}&user=#{user}", {}, (err, statusCode, body) ->
+    post "#{app}/#{branch}?room_id=#{room_id}&user=#{user}",
+    {}, (err, statusCode, body) ->
       if statusCode == 201 or statusCode == 404
         response = body
       else
         console.log body
-        response = "Can't go HAM on #{app}/#{branch}, shit's being weird. Got HTTP status #{statusCode}"
+        response = "Can't go HAM on #{app}/#{branch}, shit's being weird." +
+        " Got HTTP status #{statusCode}"
 
       msg.send response
 
-  robot.respond /ci setup ([\.\-\/_a-z0-9]+)(\s([\.\-_a-z0-9]+)(\s([\.\-_a-z0-9]+))?)?/i, (msg) ->
+  # assign the regex to a var, to satisfy coffeelint
+  rxp = /ci setup ([\.\-\/_a-z0-9]+)(\s([\.\-_a-z0-9]+)(\s([\.\-_a-z0-9]+))?)?/i
+  robot.respond rxp, (msg) ->
     nwo     = msg.match[1]
     params  = "?nwo=#{nwo}"
     if msg.match[3] != undefined
@@ -121,7 +127,8 @@ module.exports = (robot) ->
       if statusCode == 201
         msg.reply body
       else
-        msg.reply "Can't Setup. Make sure I have access to it. Expected HTTP status 201, got #{statusCode}"
+        msg.reply "Can't Setup. Make sure I have access to it." +
+        " Expected HTTP status 201, got #{statusCode}"
 
   robot.respond /ci toggle ([-_\.0-9a-zA-Z]+)/i, (msg) ->
     app    = msg.match[1]
@@ -130,7 +137,7 @@ module.exports = (robot) ->
       if statusCode == 200
         msg.send body
       else
-        msg.reply "Failed to flip the flag. Sorry. Got HTTP status #{statusCode}"
+        msg.reply "Failed to flip the flag. Got HTTP status #{statusCode}"
 
   robot.respond /ci set room ([-_0-9a-zA-Z\.]+) (.*)$/i, (msg) ->
     repo = msg.match[1]
@@ -169,7 +176,8 @@ module.exports = (robot) ->
   robot.respond /ci builds ([0-9]+) ?(building)?$/i, (msg) ->
     limit = msg.match[1]
     building = msg.match[2]?
-    get "builds?limit=#{limit}&building=#{building}", {}, (err, statusCode, body) ->
+    get "builds?limit=#{limit}&building=#{building}",
+        {}, (err, statusCode, body) ->
       builds = JSON.parse(body)
       response = buildsStatus(builds) || "Builds? Sorry, there's no builds here"
 
@@ -183,7 +191,8 @@ module.exports = (robot) ->
       else
         msg.send("Couldn't get status. Got HTTP status #{statusCode}")
 
-  robot.respond /ci status (-v )?([-_\.0-9a-zA-Z]+)(\/([-_\+\.a-zA-z0-9\/]+))?/i, (msg) ->
+  rgxp = /ci status (-v )?([-_\.0-9a-zA-Z]+)(\/([-_\+\.a-zA-z0-9\/]+))?/i
+  robot.respond rgxp, (msg) ->
     app    = msg.match[2]
     count  = 5
     branch = msg.match[4] || 'master'
@@ -193,7 +202,8 @@ module.exports = (robot) ->
 
     get "#{app}/#{branch}?limit=#{count}", { }, (err, statusCode, body) ->
       builds = JSON.parse(body)
-      response = buildsStatus(builds) || "Sorry, no builds found for #{app}/#{branch}"
+      response = buildsStatus(builds) || "Sorry, no builds found for" +
+      " #{app}/#{branch}"
 
       msg.send response
 
@@ -218,5 +228,6 @@ module.exports = (robot) ->
     app = msg.match[1]
     del "#{app}", {}, (err, statusCode, body) ->
       if statusCode != 200
-        msg.reply "I got an error removing #{app}; sometimes deleting all the old commits/branches times out the unicorn. Maybe try again?"
+        msg.reply "I got an error removing #{app}; sometimes deleting all the" +
+        " old commits/branches times out the unicorn. Maybe try again?"
       msg.send body
