@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "author": "Charles Butler <chuck@dasroot.net>",
-  "description": "I do things sometimes",
+  "description": "I do things sometimes. So do I.",
   "dependencies": {
+    "btoa": "^1.1.2",
     "coffeelint": "^1.9.6",
     "htmlparser": "^1.7.6",
     "hubot": "^2.12.0",
