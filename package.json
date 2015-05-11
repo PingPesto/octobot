@@ -6,7 +6,7 @@
   "description": "I do things sometimes",
   "dependencies": {
     "btoa": "^1.1.2",
-    "coffeelint": "^1.9.6",
+    "coffeelint": "^1.9.6"
     "htmlparser": "^1.7.6",
     "hubot": "^2.12.0",
     "hubot-ambush": "0.0.3",
