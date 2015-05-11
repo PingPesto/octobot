@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "author": "Charles Butler <chuck@dasroot.net>",
-  "description": "I do things sometimes",
+  "description": "I do things sometimes, and dj like a madman",
   "dependencies": {
     "btoa": "^1.1.2",
-    "coffeelint": "^1.9.6"
+    "coffeelint": "^1.9.6",
     "htmlparser": "^1.7.6",
     "hubot": "^2.12.0",
     "hubot-ambush": "0.0.3",
