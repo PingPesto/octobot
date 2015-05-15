@@ -23,7 +23,6 @@ module.exports = (robot) ->
 processVideo = (msg, videoid) ->
   if not process.env.DJ_API_URL
     msg.send "Error: Theres no DJ API specified. Herp Derp set DJ_API_URL"
-  if not (process.env.DJ_API_URL)
     return
   url = "#{ process.env.DJ_API_URL }/fetch/youtube/#{ encodeURIComponent(videoid) }"
   msg.http(url).get() (err, res, body) ->
