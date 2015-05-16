@@ -20,7 +20,7 @@
 
 module.exports = (robot) ->
   # Scrape Controls
-  robot.hear /https:\/\/www.youtube.com(.*)/i, (msg) ->
+  robot.hear /https:\/\/(.*).youtube.com(.*)/i, (msg) ->
     # Filter by room
     if (msg.message.room == process.env.DJ_ROOM)
       videoid = msg.message.text.split("v=")[1]
