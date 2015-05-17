@@ -21,10 +21,18 @@
 module.exports = (robot) ->
   # Scrape Controls
   robot.hear /https:\/\/(.*).youtube.com(.*)/i, (msg) ->
-    # Filter by room
-    if (msg.message.room == process.env.DJ_ROOM)
-      videoid = msg.message.text.split("v=")[1]
-      processVideo msg, videoid
+    videoid = msg.message.text.split("v=")[1]
+    processLink msg, 'youtube', videoid
+
+  robot.hear /spotify:track:(.*)/i, (msg) ->
+    processLink msg, 'spotify'
+
+  robot.hear /(.*).soundcloud.com(.*)/i, (msg) ->
+    user = msg.message.text.split('/')[3]
+    linkid = msg.message.text.split('/')[4]
+    processLink msg, 'soundcloud', linkid, user
+
+
 
   # Player Controls
   robot.hear /^!skip/i, (msg) ->
@@ -53,11 +61,23 @@ playCtl = (msg, reply, ctl) ->
   msg.http(url).get() (err, res, body) ->
     msg.send "#{reply}"
 
-processVideo = (msg, videoid) ->
+processLink = (msg, service, linkid='', user='') ->
   if not process.env.DJ_API_URL
     msg.send "Error: Theres no DJ API specified. Herp Derp set DJ_API_URL"
     return
-  url = "#{ process.env.DJ_API_URL }/fetch/youtube/#{ encodeURIComponent(videoid) }"
+    # Filter by room
+  if(msg.message.room != process.env.DJ_ROOM)
+    return
+
+  if(service == "youtube")
+    url = "#{ process.env.DJ_API_URL }/fetch/youtube/#{ encodeURIComponent(videoid) }"
+  if(service == "spotify")
+    url = "#{ process.env.DJ_API_URL }/fetch/spotify/#{ encodeURIComponent(msg.message.text) }"
+  if(service == "soundcloud")
+    url = "#{ process.env.DJ_API_URL }/fetch/soundcloud/#{ encodeURIComponent(user) }/#{ encodeURIComponent(linkid) }"
+
+  console.log(url)
+
   msg.http(url).get() (err, res, body) ->
     resp = JSON.parse(body)
-    msg.send "Fetching: #{ msg.message.text }"
+    msg.send "Job Queued: #{ resp.JobID }"
