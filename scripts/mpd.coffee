@@ -70,7 +70,7 @@ processLink = (msg, service, linkid='', user='') ->
     return
 
   if(service == "youtube")
-    url = "#{ process.env.DJ_API_URL }/fetch/youtube/#{ encodeURIComponent(videoid) }"
+    url = "#{ process.env.DJ_API_URL }/fetch/youtube/#{ encodeURIComponent(linkid) }"
   if(service == "spotify")
     url = "#{ process.env.DJ_API_URL }/fetch/spotify/#{ encodeURIComponent(msg.message.text) }"
   if(service == "soundcloud")
