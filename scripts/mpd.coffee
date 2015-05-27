@@ -26,6 +26,10 @@ module.exports = (robot) ->
 
   robot.hear /spotify:track:(.*)/i, (msg) ->
     processLink msg, 'spotify'
+  robot.hear /spotify:album:(.*)/i, (msg) ->
+    processLink msg, 'spotify'
+  robot.hear /spotify:user:(.*)/i, (msg) ->
+    processLink msg, 'spotify'
 
   robot.hear /(.*).soundcloud.com(.*)/i, (msg) ->
     user = msg.message.text.split('/')[3]
