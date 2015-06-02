@@ -2,5 +2,6 @@ image: bradrydzewski/node:0.10
 env:
     - JANKY_URL-{{janky_url}}
 script:
+    - npm install -g grunt-cli
     - npm install
     - grunt
