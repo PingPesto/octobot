@@ -1,0 +1,7 @@
+image: bradrydzewski/node:0.10
+env:
+    - HUBOT_JANKY_URL={{HUBOT_JANKY_URL}}
+script:
+    - npm install -g grunt-cli
+    - npm install
+    - grunt
