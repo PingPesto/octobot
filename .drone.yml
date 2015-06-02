@@ -1,0 +1,5 @@
+image: bradrydzewski/node:0.10
+env:
+    - JANKY_URL-{{janky_url}}
+script:
+    - grunt
