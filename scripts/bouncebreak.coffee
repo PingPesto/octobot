@@ -9,7 +9,7 @@ module.exports = (robot) ->
     bounceBreakCall msg, (image_url) ->
       msg.send image_url
 
-bounceBreakRegexp = /img src="(http:\/\/i.imgur.com\/[^"]+)"/
+bounceBreakRegexp = /img src="(http:\/\/bouncebreak.com\/gif\/bounce\/[^"]+)"/
 bounceBreakCall = (msg, cb) ->
   msg.http("http://bouncebreak.tumblr.com/rss")
     .get() (err, res, body) ->
